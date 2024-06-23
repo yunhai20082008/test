@@ -4,6 +4,6 @@
   become: yes
   tasks:
     - name: centos7 install git
-      apt:
+      yum:
         name: git
         state: present
