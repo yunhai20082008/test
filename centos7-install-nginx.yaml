@@ -3,6 +3,11 @@
 - hosts: all
   become: yes
   tasks:
+    - name: centos7 install epel
+      yum:
+        name: epel-release
+        state: present
+
     - name: centos7 install nginx
       yum:
         name: nginx
