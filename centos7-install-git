@@ -1,0 +1,9 @@
+---
+
+- hosts: all
+  become: yes
+  tasks:
+    - name: centos7 install git
+      apt:
+        name: git
+        state: present
