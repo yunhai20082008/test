@@ -4,11 +4,17 @@
   become: yes
   tasks:
     - name: centos7 install epel
-      yum:
+      ansible.builtin.yum:
         name: epel-release
         state: present
 
     - name: centos7 install nginx
-      yum:
+      ansible.builtin.yum:
         name: nginx
         state: present
+
+    - name: start nginx
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: yes
