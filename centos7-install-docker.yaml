@@ -5,3 +5,9 @@
   tasks:
     - name: centos7 install docker
       ansible.builtin.shell: curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+
+    - name: start docker
+      ansible.builtin.service:
+        name: docker
+        state: started
+        enabled: yes
