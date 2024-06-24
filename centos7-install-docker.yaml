@@ -1,0 +1,7 @@
+---
+
+- hosts: all
+  become: yes
+  tasks:
+    - name: centos7 install docker
+      ansible.builtin.shell: curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
