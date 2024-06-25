@@ -2,6 +2,8 @@
 
 - hosts: all
   become: yes
+  collections:
+    - community.mysql
   tasks:
     # - name: centos7 install wget
     #   yum:
