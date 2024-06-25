@@ -1,0 +1,26 @@
+---
+
+- hosts: all
+  become: yes
+  tasks:
+    # - name: centos7 install wget
+    #   yum:
+    #     name: wget
+    #     state: present
+
+    - name: centos7 get&install noarch
+      ansible.builtin.shell: sudo rpm -ivh https://mirrors.tuna.tsinghua.edu.cn/mysql/yum/mysql80-community-el7/mysql80-community-release-el7-7.noarch.rpm
+
+    - name: centos7 get&install noarch
+      ansible.builtin.shell: sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2023
+
+    - name: centos7 install mysql-community-server-8.0.31
+      ansible.builtin.yum:
+        name: mysql-community-server-8.0.31
+        state: present
+
+    - name: start mysql-community-server-8.0.31
+      ansible.builtin.service:
+        name: mysql
+        state: started
+        enabled: yes
