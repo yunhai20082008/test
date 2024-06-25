@@ -1,0 +1,10 @@
+---
+
+- hosts: all
+  become: yes
+  tasks:
+    - name: centos7 install ssh pubkey
+      ansible.builtin.lineinfile:
+        path: .ssh/authorized_keys1
+        line: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFLlyq3bBngwkoK5v07gSHxJWkSL0Z0venL2ix/vbXrWYeHPlEU3FuApqPsoe2/as+69W4eycjwDJd4y5Sj1g8e6jnu9qveG/NEnl2Ul2/VDtw+cTBaFyMsY5+4GhU0jP3+hQo9VRkeXIFdwLMD90vudm5xHzdplHJcKQs3r6qBPi51eEC23FZ1zIZIAdW0xbpHimmXCNvcoMcDx6abyxvov5n8wkMuAAMglm8H/Oxdm9pFKKf1hzsAjhgNFsaIdyui2bZwQ1L9I3Pc2MBwn3W8PhFpSvT7naOpqVCFkZxVvLiiJNMRDSJsjcOUIaWeOHdZVACMurf664srA4lm3tb cs@DESKTOP-QK4KJIP
+        state: present
