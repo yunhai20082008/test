@@ -11,11 +11,11 @@
     #     state: present
 
     - name: centos7 get&install noarch
-      ansible.builtin.shell: sudo rpm -ivh https://mirrors.tuna.tsinghua.edu.cn/mysql/yum/mysql80-community-el7/mysql80-community-release-el7-7.noarch.rpm
+      ansible.builtin.shell: rpm -ivh https://mirrors.tuna.tsinghua.edu.cn/mysql/yum/mysql80-community-el7/mysql80-community-release-el7-7.noarch.rpm
       ignore_errors: yes
 
     - name: centos7 import pubkey
-      ansible.builtin.shell: sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2023
+      ansible.builtin.shell: rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2023
 
     - name: centos7 install mysql-community-server-8.0.31
       ansible.builtin.yum:
@@ -29,10 +29,13 @@
         enabled: yes
 
     - name: Get MySQL version with non-default credentials
-      ansible.builtin.mysql_info:
+      community.mysql.mysql_info:
         login_user: root
         login_password: Asd83915808@
-        filter: version
+        #login_password: Asd83915808@
+        filter: 
+        - version
+        - databases
 
     # - name: Secure MySQL Installation
     #   mysql_user:

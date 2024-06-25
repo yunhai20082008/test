@@ -1,0 +1,17 @@
+- name: centos7 get&install noarch
+  ansible.builtin.shell: rpm -ivh https://mirrors.tuna.tsinghua.edu.cn/mysql/yum/mysql80-community-el7/mysql80-community-release-el7-7.noarch.rpm
+  ignore_errors: yes
+
+- name: centos7 import pubkey
+  ansible.builtin.shell: rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2023
+
+- name: centos7 install mysql-community-server-8.0.31
+  ansible.builtin.yum:
+    name: mysql-community-server-8.0.31
+    state: present
+
+- name: start mysql
+  ansible.builtin.service:
+    name: mysqld
+    state: started
+    enabled: yes

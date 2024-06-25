@@ -1,0 +1,15 @@
+- name: centos7 install epel
+  ansible.builtin.yum:
+    name: epel-release
+    state: present
+
+- name: centos7 install nginx
+  ansible.builtin.yum:
+    name: nginx
+    state: present
+
+- name: start nginx
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: yes

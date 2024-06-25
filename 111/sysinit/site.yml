@@ -1,0 +1,9 @@
+- hosts: nodes
+  become: yes
+  remote_user: root
+  gather_facts: yes
+  roles:
+    # - install-git
+    # - install-nginx
+    # - install-mysql8031
+    - set-mysql8031

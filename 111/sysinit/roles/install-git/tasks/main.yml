@@ -1,0 +1,4 @@
+- name: centos7 install git
+  yum:
+    name: 
+    - git

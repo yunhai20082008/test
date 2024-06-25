@@ -1,0 +1,23 @@
+- name: install MySQL-python
+  yum:
+    name: MySQL-python
+    state: present
+
+- name: Get MySQL version with non-default credentials
+  community.mysql.mysql_info:
+    login_user: root
+    login_password: Asd83915808@
+    #login_password: Asd83915808@
+    filter: 
+    - version
+    - databases
+  register: _mysql_version
+
+- name: Create new databases with names 'foo' and 'bar'
+  community.mysql.mysql_db:
+    login_user: root
+    login_password: Asd83915808@
+    name:
+      - foo
+      - bar
+    state: present
