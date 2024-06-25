@@ -20,15 +20,19 @@
         name: mysql-community-server-8.0.31
         state: present
 
-    - name: start mysql-community-server-8.0.31
+    - name: start mysql
       ansible.builtin.service:
         name: mysqld
         state: started
         enabled: yes
 
     - name: Secure MySQL Installation
-      ansible.builtin.mysql_user:
-        login_user: root
-        host_all: yes
+      mysql_user:
+        name: root
         password: Asd83915808@
-        update_password: always        
+        update_password: on_create        
+
+    - name: restart mysql
+      ansible.builtin.service:
+        name: mysqld
+        state: restarted
