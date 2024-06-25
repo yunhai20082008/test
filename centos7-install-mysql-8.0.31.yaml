@@ -21,6 +21,6 @@
 
     - name: start mysql-community-server-8.0.31
       ansible.builtin.service:
-        name: mysql
+        name: mysqld
         state: started
         enabled: yes
