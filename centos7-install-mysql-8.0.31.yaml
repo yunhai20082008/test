@@ -27,7 +27,7 @@
         enabled: yes
 
     - name: Secure MySQL Installation
-      community.mysql.mysql_user:
+      ansible.builtin.mysql_user:
         login_user: root
         host_all: yes
         password: Asd83915808@
