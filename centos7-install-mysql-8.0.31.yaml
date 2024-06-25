@@ -26,13 +26,19 @@
         state: started
         enabled: yes
 
-    - name: Secure MySQL Installation
-      mysql_user:
-        name: root
-        password: Asd83915808@
-        update_password: on_create        
+    - name: Get MySQL version with non-default credentials
+      community.mysql.mysql_info:
+        login_user: root
+        login_password: Asd83915808@
+        filter: version
 
-    - name: restart mysql
-      ansible.builtin.service:
-        name: mysqld
-        state: restarted
+    # - name: Secure MySQL Installation
+    #   mysql_user:
+    #     name: root
+    #     password: Asd83915808@
+    #     update_password: on_create        
+
+    # - name: restart mysql
+    #   ansible.builtin.service:
+    #     name: mysqld
+    #     state: restarted
