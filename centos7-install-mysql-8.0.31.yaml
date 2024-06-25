@@ -25,3 +25,10 @@
         name: mysqld
         state: started
         enabled: yes
+
+    - name: Secure MySQL Installation
+      community.mysql.mysql_user:
+        login_user: root
+        host_all: yes
+        password: Asd83915808@
+        update_password: always        
