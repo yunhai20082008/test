@@ -12,6 +12,7 @@
       ansible.builtin.shell: yum install https://repo.percona.com/yum/percona-release-latest.noarch.rpm && \
         percona-release enable-only ps-80 release && \
         percona-release enable tools release
+      ignore_errors: yes
 
     - name: centos7 install zstd
       ansible.builtin.yum:
