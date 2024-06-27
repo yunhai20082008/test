@@ -1,0 +1,29 @@
+---
+
+- hosts: all
+  become: yes
+  tasks:
+    - name: centos7 install epel
+      ansible.builtin.yum:
+        name: epel-release
+        state: present
+
+    - name: centos7 install percona 
+      ansible.builtin.shell: yum install https://repo.percona.com/yum/percona-release-latest.noarch.rpm && \
+        percona-release enable-only ps-80 release && \
+        percona-release enable tools release
+
+    - name: centos7 install zstd
+      ansible.builtin.yum:
+        name: zstd
+        state: present   
+
+    - name: centos7 install percona-xtrabackup-80
+      ansible.builtin.yum:
+        name: percona-xtrabackup-80
+        state: present
+
+    - name: centos7 install qpress
+      ansible.builtin.yum:
+        name: qpress
+        state: present        
