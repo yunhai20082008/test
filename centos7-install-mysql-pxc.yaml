@@ -53,7 +53,7 @@
         state: directory
 
     - name: untar Percona-XtraDB-Cluster.tar
-      ansible.builtin.shell: tar -xf /vagrant/*.tar -C /home/vagrant/tmp/
+      ansible.builtin.shell: tar -xf /vagrant/vagrant/*.tar -C /home/vagrant/tmp/
 
     - name: install Percona-XtraDB-Cluster
       ansible.builtin.shell: rpm -ivh /home/vagrant/tmp/* --nodeps --force
