@@ -41,3 +41,8 @@
       ansible.builtin.yum:
         name: qpress
         state: present        
+
+    - name: Download file from a file path
+      get_url:  
+        url: http://192.168.20.251:8080/Percona-XtraDB-Cluster-8.0.36-rbfb687f-el7-x86_64-bundle.tar
+        dest: /vagrant/Percona-XtraDB-Cluster.tar       
