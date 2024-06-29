@@ -14,9 +14,9 @@
     #     dest: /home/vagrant/percona-release-latest.noarch.rpm
 
     - name: Centos7 install percona
-      ansible.builtin.yum_repository:
-        name: percona
-        baseurl: https://repo.percona.com/yum/
+      ansible.builtin.yum:
+        name: https://repo.percona.com/yum/percona-release-latest.noarch.rpm
+        state: present
 
 
     # - name: Centos7 install percona
