@@ -61,11 +61,16 @@
     - name: centos7 install MySQL-python
       ansible.builtin.yum:
         name: MySQL-python
-        state: present   
+        state: present
 
-    - name: Reset MySQL password for 'username'
-      community.mysql.mysql_user:
-        login_host: 'localhost'
-        user: 'root'
-        password: 'Asd83915808@'
-        update_password: on_create    
+    # - name: Copy my.cnf
+    #   copy:
+    #     src: /vagrant/vagrant/my.cnf
+    #     dest: /etc/my.cnf
+
+    # - name: Reset MySQL password for 'username'
+    #   community.mysql.mysql_user:
+    #     login_host: 'localhost'
+    #     user: 'root'
+    #     password: 'Asd83915808@'
+    #     update_password: on_create    
