@@ -63,8 +63,17 @@
     #     name: MySQL-python
     #     state: present
 
-    - name: Copy my.cnf
-      ansible.builtin.shell: cp /vagrant/vagrant/my.cnf /etc/my.cnf
+    - name: stop mysql
+      # 如果是使用Systemd管理的服务，可以使用systemd模块
+      systemd:
+        name: mysqld
+        state: stop
+        enabled: yes
+    - name: comment nopass mysql
+      ansible.builtin.shell: sed '/skip-grant-tables/i\#' /etc/my.cnf
+
+    # - name: Copy my.cnf
+    #   ansible.builtin.shell: cp /vagrant/vagrant/my.cnf /etc/my.cnf
 
     - name: Start mysql
       # 如果是使用Systemd管理的服务，可以使用systemd模块
