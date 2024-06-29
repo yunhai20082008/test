@@ -39,11 +39,11 @@
     #     url: http://192.168.20.251:8080/Percona-XtraDB-Cluster-8.0.36-rbfb687f-el7-x86_64-bundle.tar
     #     dest: /vagrant/Percona-XtraDB-Cluster.tar
 
-    - name: Creat tmp
-      ansible.builtin.file:
-        path: /home/vagrant/tmp
-        state: directory
-        mode: '0755'
+    # - name: Creat tmp
+    #   ansible.builtin.file:
+    #     path: /home/vagrant/tmp
+    #     state: directory
+    #     mode: '0755'
 
     - name: Untar Percona-XtraDB-Cluster.tar
       ansible.builtin.unarchive:
