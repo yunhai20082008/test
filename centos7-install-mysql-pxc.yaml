@@ -70,7 +70,7 @@
         state: stopped
         enabled: yes
     - name: comment nopass mysql
-      ansible.builtin.shell: sed '/skip-grant-tables/i\#' /etc/my.cnf
+      ansible.builtin.shell: sed '/skip-grant-tables/d' /etc/my.cnf
 
     # - name: Copy my.cnf
     #   ansible.builtin.shell: cp /vagrant/vagrant/my.cnf /etc/my.cnf
