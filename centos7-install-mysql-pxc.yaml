@@ -66,6 +66,13 @@
     - name: Copy my.cnf
       ansible.builtin.shell: cp /vagrant/vagrant/my.cnf /etc/my.cnf
 
+    - name: Start mysql
+      # 如果是使用Systemd管理的服务，可以使用systemd模块
+      systemd:
+        name: mysqld
+        state: started
+        enabled: yes
+
     - name: Reset MySQL password for 'username'
       community.mysql.mysql_user:
         login_host: 'localhost'
