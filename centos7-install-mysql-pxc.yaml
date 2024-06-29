@@ -64,9 +64,7 @@
         state: present
 
     - name: Copy my.cnf
-      copy:
-        src: /vagrant/vagrant/my.cnf
-        dest: /etc/my.cnf
+      ansible.builtin.shell: cp /vagrant/vagrant/my.cnf /etc/my.cnf
 
     - name: Reset MySQL password for 'username'
       community.mysql.mysql_user:
