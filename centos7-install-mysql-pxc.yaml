@@ -91,7 +91,7 @@
         password: Asd83915808@
         host: localhost
         login_user: root
-        login_password: {{ substring }}
+        login_password: "{{ substring }}"
         state: present
 
     # - name: comment nopass mysql
