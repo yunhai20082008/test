@@ -78,7 +78,7 @@
         login_host: 'localhost'
         user: 'root'
         password: 'Asd83915808@'
-        update_password: on_create    
+        update_password: always
 
     - name: comment nopass mysql
       ansible.builtin.shell: sed '/skip-grant-tables/i\#' /etc/my.cnf
