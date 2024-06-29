@@ -58,6 +58,11 @@
     - name: install Percona-XtraDB-Cluster
       ansible.builtin.shell: rpm -ivh /home/vagrant/tmp/* --nodeps --force
 
+    - name: centos7 install MySQL-python
+      ansible.builtin.yum:
+        name: MySQL-python
+        state: present   
+
     - name: Reset MySQL password for 'username'
       community.mysql.mysql_user:
         login_host: 'localhost'
