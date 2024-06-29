@@ -8,16 +8,22 @@
         name: epel-release
         state: present
 
-    - name: Download percona.noarch
-      ansible.builtin.get_url:
-        url: https://repo.percona.com/yum/percona-release-latest.noarch.rpm
-        dest: //home/vagrant/percona-release-latest.noarch.rpm
+    # - name: Download percona.noarch
+    #   ansible.builtin.get_url:
+    #     url: https://repo.percona.com/yum/percona-release-latest.noarch.rpm
+    #     dest: /home/vagrant/percona-release-latest.noarch.rpm
 
     - name: Centos7 install percona
-      ansible.builtin.shell: yum install https://repo.percona.com/yum/percona-release-latest.noarch.rpm && \
-        percona-release enable-only ps-80 release && \
-        percona-release enable tools release
-      ignore_errors: true
+      ansible.builtin.yum_repository:
+        name: percona
+        baseurl: https://repo.percona.com/yum/
+
+
+    # - name: Centos7 install percona
+    #   ansible.builtin.shell: yum install https://repo.percona.com/yum/percona-release-latest.noarch.rpm && \
+    #     percona-release enable-only ps-80 release && \
+    #     percona-release enable tools release
+    #   ignore_errors: true
 
     - name: centos7 install zstd
       ansible.builtin.yum:
