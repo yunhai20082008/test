@@ -74,7 +74,7 @@
         enabled: yes
 
     - name: Get init password
-      ansible.builtin.shell: grep 'temporary password' /var/log/mysqld.log | awk 'BEGIN{FS=": "}{print $2}'
+      ansible.builtin.shell: grep 'temporary password' /var/log/mysqld.log | awk 'BEGIN{FS="\: "}{print $2}'
       register: init_password
 
     - name: Print init_password
