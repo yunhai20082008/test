@@ -22,7 +22,7 @@
 
 
     - name: centos7 install percona 
-      ansible.builtin.shell: rpm -ivh https://repo.percona.com/yum/percona-release-latest.noarch.rpm && \
+      ansible.builtin.shell: rpm -i https://repo.percona.com/yum/percona-release-latest.noarch.rpm && \
         percona-release enable-only ps-80 release && \
         percona-release enable tools release
       ignore_errors: yes
@@ -56,7 +56,7 @@
       ansible.builtin.shell: tar -xf /vagrant/vagrant/*.tar -C /home/vagrant/tmp/
 
     - name: install Percona-XtraDB-Cluster
-      ansible.builtin.shell: rpm -ivh /home/vagrant/tmp/* --nodeps --force
+      ansible.builtin.shell: rpm -i /home/vagrant/tmp/* --nodeps --force
 
     - name: centos7 install MySQL-python
       ansible.builtin.yum:
@@ -72,3 +72,4 @@
         user: 'root'
         password: 'Asd83915808@'
         update_password: on_create    
+# sed '/skip-grant-tables/i\#' /etc/my.cnf        
