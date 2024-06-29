@@ -48,6 +48,8 @@
     - name: Untar Percona-XtraDB-Cluster.tar
       ansible.builtin.unarchive:
         copy: false
+        creates: home/vagrant/tmp
+        mode: 0755
         src: /vagrant/vagrant/Percona-XtraDB-Cluster-8.0.36-rbfb687f-el7-x86_64-bundle.tar
         dest: /home/vagrant/tmp
     #   ansible.builtin.shell: tar -xf /vagrant/vagrant/*.tar -C /home/vagrant/tmp/
