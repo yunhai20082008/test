@@ -85,12 +85,14 @@
       debug:
         msg: "{{ substring }}"
 
-    # - name: Reset MySQL password for 'username'
-    #   community.mysql.mysql_user:
-    #     login_host: 'localhost'
-    #     user: 'root'
-    #     password: 'Asd83915808@'
-    #     update_password: always
+    - name: Reset MySQL password for 'username'
+      community.mysql.mysql_user:
+        name: root
+        password: Asd83915808@
+        host: localhost
+        login_user: root
+        login_password: {{ substring }}
+        state: present
 
     # - name: comment nopass mysql
     #   ansible.builtin.shell: sed '/skip-grant-tables/i\#' /etc/my.cnf
