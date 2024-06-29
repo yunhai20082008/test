@@ -79,9 +79,9 @@
 
     - name: Print init_password
       set_fact:
-        substring: {{ init_password.stdout | slice(-8,-1) }}
+        substring: "{{ init_password.stdout.slice(-8,-1) }}
       debug:
-        msg: "The init_password was {{ substring }}"
+        msg: substring 
 
     # - name: Reset MySQL password for 'username'
     #   community.mysql.mysql_user:
