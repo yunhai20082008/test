@@ -74,7 +74,7 @@
       ansible.builtin.shell: cp /vagrant/vagrant/my.cnf /etc/my.cnf
 
     - name: comment nopass mysql
-      ansible.builtin.shell: sed '/skip-grant-tables/d' /etc/my.cnf
+      ansible.builtin.shell: sed '/skip-grant-tables/d' /etc/my.cnf > /etc/my.cnf 
 
     - name: Start mysql
       # 如果是使用Systemd管理的服务，可以使用systemd模块
