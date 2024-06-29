@@ -83,7 +83,8 @@
 
     - name: Debug
       debug:
-        msg: {{ substring }}
+        msg: |
+          substring: {{ substring }}
 
     # - name: Reset MySQL password for 'username'
     #   community.mysql.mysql_user:
