@@ -72,4 +72,13 @@
         user: 'root'
         password: 'Asd83915808@'
         update_password: on_create    
-# sed '/skip-grant-tables/i\#' /etc/my.cnf        
+
+    - name: comment nopass mysql
+      ansible.builtin.shell: sed '/skip-grant-tables/i\#' /etc/my.cnf
+
+    - name: Restart mysql
+      # 如果是使用Systemd管理的服务，可以使用systemd模块
+      systemd:
+        name: mysqld
+        state: restarted
+        enabled: yes
