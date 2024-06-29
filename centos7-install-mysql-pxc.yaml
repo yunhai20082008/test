@@ -1,36 +1,28 @@
 ---
 
 - hosts: all
-  become: yes
+  become: true
   tasks:
     - name: centos7 install epel
       ansible.builtin.yum:
         name: epel-release
         state: present
 
-    # - name: Download percona.noarch
-    #   ansible.builtin.get_url:
-    #     url: https://repo.percona.com/yum/percona-release-latest.noarch.rpm
-    #     dest: //home/vagrant/percona-release-latest.noarch.rpm
+    - name: Download percona.noarch
+      ansible.builtin.get_url:
+        url: https://repo.percona.com/yum/percona-release-latest.noarch.rpm
+        dest: //home/vagrant/percona-release-latest.noarch.rpm
 
-    # - name: centos7 install percona 
-    #   ansible.builtin.shell: yum install https://repo.percona.com/yum/percona-release-latest.noarch.rpm && \
-    #     percona-release enable-only ps-80 release && \
-    #     percona-release enable tools release
-    #   ignore_errors: yes
-
-
-
-    - name: centos7 install percona 
-      ansible.builtin.shell: rpm -i https://repo.percona.com/yum/percona-release-latest.noarch.rpm && \
+    - name: Centos7 install percona
+      ansible.builtin.shell: yum install https://repo.percona.com/yum/percona-release-latest.noarch.rpm && \
         percona-release enable-only ps-80 release && \
         percona-release enable tools release
-      ignore_errors: yes
+      ignore_errors: true
 
     - name: centos7 install zstd
       ansible.builtin.yum:
         name: zstd
-        state: present   
+        state: present
 
     - name: centos7 install percona-xtrabackup-80
       ansible.builtin.yum:
@@ -40,76 +32,79 @@
     - name: centos7 install qpress
       ansible.builtin.yum:
         name: qpress
-        state: present        
+        state: present
 
     # - name: Download file from a file path
-    #   get_url:  
+    #   get_url:
     #     url: http://192.168.20.251:8080/Percona-XtraDB-Cluster-8.0.36-rbfb687f-el7-x86_64-bundle.tar
-    #     dest: /vagrant/Percona-XtraDB-Cluster.tar       
+    #     dest: /vagrant/Percona-XtraDB-Cluster.tar
 
-    - name: creat tmp
+    - name: Creat tmp
       ansible.builtin.file:
         path: /home/vagrant/tmp
         state: directory
+        mode: '0755'
 
-    - name: untar Percona-XtraDB-Cluster.tar
-      ansible.builtin.shell: tar -xf /vagrant/vagrant/*.tar -C /home/vagrant/tmp/
+    - name: Untar Percona-XtraDB-Cluster.tar
+      ansible.builtin.unarchive:
+        src: /vagrant/vagrant/*.tar
+        dest: /home/vagrant/tmp
+    #   ansible.builtin.shell: tar -xf /vagrant/vagrant/*.tar -C /home/vagrant/tmp/
 
-    - name: install Percona-XtraDB-Cluster
-      ansible.builtin.shell: rpm -i /home/vagrant/tmp/* --nodeps --force
+    # - name: Install Percona-XtraDB-Cluster
+    #   ansible.builtin.shell: rpm -i /home/vagrant/tmp/* --nodeps --force
 
-    - name: centos7 install MySQL-python
-      ansible.builtin.yum:
-        name: MySQL-python
-        state: present
+    # - name: centos7 install MySQL-python
+    #   ansible.builtin.yum:
+    #     name: MySQL-python
+    #     state: present
 
-    - name: stop mysql
-      # 如果是使用Systemd管理的服务，可以使用systemd模块
-      systemd:
-        name: mysqld
-        state: stopped
-        enabled: yes
-
-    - name: Copy my.cnf
-      ansible.builtin.shell: cp /vagrant/vagrant/my.cnf /etc/my.cnf
-
-    # - name: comment nopass mysql
-    #   ansible.builtin.shell: sed '/skip-grant-tables/d' /etc/my.cnf > /etc/my.cnf 
-
-    - name: Start mysql
-      # 如果是使用Systemd管理的服务，可以使用systemd模块
-      systemd:
-        name: mysqld
-        state: started
-        enabled: yes
-
-    - name: Get init password
-      ansible.builtin.shell: grep 'temporary password' /var/log/mysqld.log
-      register: init_password
-
-    - name: Print init_password
-      set_fact:
-        substring: "{{ init_password.stdout.split(': ')[1].split('\n')[0] }}"
-
-    - name: Debug
-      debug:
-        msg: "{{ substring }}"
-
-    - name: Reset MySQL password for 'username'
-      community.mysql.mysql_user:
-        name: root
-        password: Asd83915808@
-        host: localhost
-        login_user: root
-        login_password: "{{ substring }}"
-        state: present
-
-    # - name: comment nopass mysql
-    #   ansible.builtin.shell: sed '/skip-grant-tables/i\#' /etc/my.cnf
-
-    # - name: Restart mysql
+    # - name: stop mysql
     #   # 如果是使用Systemd管理的服务，可以使用systemd模块
     #   systemd:
     #     name: mysqld
-    #     state: restarted
-    #     enabled: yes
+    #     state: stopped
+    #     enabled: true
+
+    # - name: Copy my.cnf
+    #   ansible.builtin.shell: cp /vagrant/vagrant/my.cnf /etc/my.cnf
+
+    # # - name: comment nopass mysql
+    # #   ansible.builtin.shell: sed '/skip-grant-tables/d' /etc/my.cnf > /etc/my.cnf
+
+    # - name: Start mysql
+    #   ansible.builtin.systemd:
+    #     name: mysqld
+    #     state: started
+    #     enabled: true
+
+    # - name: Get init password
+    #   ansible.builtin.shell: grep 'temporary password' /var/log/mysqld.log
+    #   register: init_password
+
+    # - name: Print init_password
+    #   set_fact:
+    #     substring: "{{ init_password.stdout.split(': ')[1].split('\n')[0] }}"
+
+    # - name: Debug
+    #   debug:
+    #     msg: "{{ substring }}"
+
+    # # - name: Reset MySQL password for 'username'
+    # #   community.mysql.mysql_user:
+    # #     name: root
+    # #     password: Asd83915808@
+    # #     host: localhost
+    # #     login_user: root
+    # #     login_password: "{{ substring }}"
+    # #     state: present
+
+    # # - name: comment nopass mysql
+    # #   ansible.builtin.shell: sed '/skip-grant-tables/i\#' /etc/my.cnf
+
+    # # - name: Restart mysql
+    # #   # 如果是使用Systemd管理的服务，可以使用systemd模块
+    # #   systemd:
+    # #     name: mysqld
+    # #     state: restarted
+    # #     enabled: true
