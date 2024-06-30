@@ -71,13 +71,24 @@
       debug:
         msg: "{{ ansible_hostname }}"
 
-    - name: Configure SELinux to permissive mode
+    # - name: Configure SELinux to permissive mode
+    #   lineinfile:
+    #     path: /etc/selinux/config
+    #     regexp: '^SELINUX='
+    #     line: SELINUX=permissive
+    #   when: ansible_selinux.status != 'permissive'
+
+    # - name: Restart the machine to ensure SELinux is in permissive mode
+    #   reboot:
+    #   when: ansible_selinux.status != 'permissive'
+
+    - name: Configure SELinux to disabled mode
       lineinfile:
         path: /etc/selinux/config
         regexp: '^SELINUX='
-        line: SELINUX=permissive
-      when: ansible_selinux.status != 'permissive'
+        line: SELINUX=disabled
+      when: ansible_selinux.status != 'disabled'
 
-    - name: Restart the machine to ensure SELinux is in permissive mode
+    - name: Restart the machine to ensure SELinux is in disabled mode
       reboot:
-      when: ansible_selinux.status != 'permissive'
+      when: ansible_selinux.status != 'disabled'
