@@ -55,34 +55,20 @@
 
     - name: Centos7 install Percona-XtraDB-Cluster
       ansible.builtin.shell: rpm -i /home/vagrant/tmp/*.rpm --nodeps --force
-      # ansible.builtin.dnf:
-      #   name: /home/vagrant/tmp/*.rpm
-      #   state: present
-      #   use_backend: yum
 
+    - name: centos7 install MySQL-python
+      ansible.builtin.yum:
+        name: MySQL-python
+        state: present
 
+    - name: stop mysql
+      ansible.builtin.systemd:
+        name: mysqld
+        state: stopped
+        enabled: true
 
-
-    # - name: Install Percona-XtraDB-Cluster
-    #   ansible.builtin.shell: rpm -i /home/vagrant/tmp/* --nodeps --force
-
-    # - name: centos7 install MySQL-python
-    #   ansible.builtin.yum:
-    #     name: MySQL-python
-    #     state: present
-
-    # - name: stop mysql
-    #   # 如果是使用Systemd管理的服务，可以使用systemd模块
-    #   systemd:
-    #     name: mysqld
-    #     state: stopped
-    #     enabled: true
-
-    # - name: Copy my.cnf
-    #   ansible.builtin.shell: cp /vagrant/vagrant/my.cnf /etc/my.cnf
-
-    # # - name: comment nopass mysql
-    # #   ansible.builtin.shell: sed '/skip-grant-tables/d' /etc/my.cnf > /etc/my.cnf
+    - name: Copy my.cnf
+      ansible.builtin.shell: cp /vagrant/vagrant/"{{ ansible_hostname }}".cnf /etc/my.cnf
 
     # - name: Start mysql
     #   ansible.builtin.systemd:
