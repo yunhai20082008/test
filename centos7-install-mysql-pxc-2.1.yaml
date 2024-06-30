@@ -100,3 +100,10 @@
     - name: Restart the machine to ensure SELinux is in disabled mode
       reboot:
       when: ansible_selinux.status != 'disabled'
+
+    - name: start mysql on node1
+      ansible.builtin.systemd:
+        name: mysql@bootstrap.service
+        state: started
+        enabled: true
+      when: ansible_hostname == 'node1'
