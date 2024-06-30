@@ -54,10 +54,11 @@
         dest: /home/vagrant/tmp
 
     - name: Centos7 install Percona-XtraDB-Cluster
-      ansible.builtin.dnf:
-        name: /home/vagrant/tmp/*.rpm
-        state: present
-        use_backend: yum
+      ansible.builtin.shell: rpm -i /home/vagrant/tmp/*.rpm --nodeps --force
+      # ansible.builtin.dnf:
+      #   name: /home/vagrant/tmp/*.rpm
+      #   state: present
+      #   use_backend: yum
 
 
 
