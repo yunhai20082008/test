@@ -8,6 +8,11 @@
         name: epel-release
         state: present
 
+    - name: centos7 install socat
+      ansible.builtin.yum:
+        name: socat
+        state: present
+
     - name: Centos7 install percona repo
       ansible.builtin.yum:
         name: https://repo.percona.com/yum/percona-release-latest.noarch.rpm
@@ -65,11 +70,14 @@
       ansible.builtin.systemd:
         name: mysqld
         state: stopped
-        enabled: true
+        enabled: false
 
-    - name: Debug
-      debug:
-        msg: "{{ ansible_hostname }}"
+    - name: Copy my.cnf
+      ansible.builtin.shell: cp /vagrant/vagrant/"{{ ansible_hostname }}".cnf /etc/my.cnf
+
+    # - name: Debug
+    #   debug:
+    #     msg: "{{ ansible_hostname }}"
 
     # - name: Configure SELinux to permissive mode
     #   lineinfile:
