@@ -55,7 +55,7 @@
 
     - name: Centos7 install Percona-XtraDB-Cluster
       ansible.builtin.yum:
-        name: /home/vagrant/tmp/*.rpm
+        name: /home/vagrant/tmp/percona-xtradb-cluster-8.0.36-28.1.el7.x86_64.rpm
         state: present
 
 
