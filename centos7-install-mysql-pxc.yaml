@@ -71,8 +71,8 @@
       debug:
         msg: "{{ ansible_hostname }}"
 
-    - name: Copy my.cnf
-      ansible.builtin.shell: cp /vagrant/vagrant/"{{ ansible_hostname }}".cnf /etc/my.cnf
+    # - name: Copy my.cnf
+    #   ansible.builtin.shell: cp /vagrant/vagrant/"{{ ansible_hostname }}".cnf /etc/my.cnf
 
     # - name: Start mysql
     #   ansible.builtin.systemd:
