@@ -57,6 +57,7 @@
       ansible.builtin.dnf:
         name: /home/vagrant/tmp/*.rpm
         state: present
+        use_backend: yum
 
 
 
