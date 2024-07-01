@@ -1,0 +1,12 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+    - name: Reset MySQL password for 'username'
+      community.mysql.mysql_user:
+        name: root
+        password: Asd83915808@
+        host: localhost
+        login_user: root
+        login_password: Asd83915808@.

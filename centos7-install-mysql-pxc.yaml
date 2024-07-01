@@ -114,3 +114,16 @@
         state: started
         enabled: true
       when: ansible_hostname != 'node1'
+
+    - name: Get node1 init password
+      ansible.builtin.shell: grep 'temporary password' /var/log/mysqld.log
+      register: init_password
+      when: ansible_hostname == 'node1'
+
+    - name: Calc node1 init_password
+      set_fact:
+        substring: "{{ init_password.stdout.split(': ')[1].split('\n')[0] }}"
+
+    - name: Print node1 init_password
+      debug:
+        msg: "{{ substring }}"
