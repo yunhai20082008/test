@@ -107,3 +107,10 @@
         state: started
         enabled: true
       when: ansible_hostname == 'node1'
+
+    - name: start mysql on other node
+      ansible.builtin.systemd:
+        name: mysql
+        state: started
+        enabled: true
+      when: ansible_hostname != 'node1'
