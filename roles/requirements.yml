@@ -2,3 +2,5 @@
 collections:
 # With just the collection name
   - name: community.mysql
+    source: https://galaxy.ansible.com
+
